@@ -51,8 +51,7 @@ template_1 = r"""
             \matrix (top) [grid matrix]{
 """
 
-template_2 = r"""
-            };
+template_2 = r"""};
             \node [above, rotate=90, text width=\x * 1cm, align=center] at (top.west) {\xlab};
         \end{scope}
         
@@ -64,8 +63,7 @@ template_2 = r"""
             \matrix (front) [grid matrix]{
 """
 
-template_3 = r"""
-            };
+template_3 = r"""};
             \node [below, text width=\z * 1cm, align=center] at (front.south) {\zlab};
             \node [above, rotate=90, text width=\y * 1cm, align=center] at (front.west) {\ylab};
         \end{scope}
@@ -82,8 +80,7 @@ template_3 = r"""
             \matrix (side) [grid matrix]{
 """
 
-template_4 = r"""
-            };
+template_4 = r"""};
         \end{scope}
     \end{scope}"""
 
@@ -167,51 +164,52 @@ def wrap_tikzpicture(texcode):
 
 
 # example:
-print(wrap_document(wrap_tikzpicture(build3D(
-    [  # front
-        [r"$a_{1,1,1}$", r"$\cdots$", r"$a_{1,1,i}$"],
-        [r"$\vdots$", r"$\ddots$", ""],
-        [r"$a_{1,j,1}$", "", r"$a_{1,j,i}$"],
-    ],
-    [  # top
-        [r"$a_{1,1,1}$", r"$\cdots$", r"$a_{k,1,i}$"],
-        [r"$\vdots$", r"$\iddots$", ""],
-        [r"$a_{k,1,1}$", "", r"$a_{k,1,i}$"],
-    ],
-    [  # side
+if __name__ == "__main__":
+    print(wrap_document(wrap_tikzpicture(build3D(
+        [  # front
+            [r"$a_{1,1,1}$", r"$\cdots$", r"$a_{1,1,i}$"],
+            [r"$\vdots$", r"$\ddots$", ""],
+            [r"$a_{1,j,1}$", "", r"$a_{1,j,i}$"],
+        ],
+        [  # top
+            [r"$a_{1,1,1}$", r"$\cdots$", r"$a_{k,1,i}$"],
+            [r"$\vdots$", r"$\iddots$", ""],
+            [r"$a_{k,1,1}$", "", r"$a_{k,1,i}$"],
+        ],
+        [  # side
 
-        [r"$a_{1,1,i}$", r"$\cdots$", r"$a_{k,1,i}$"],
-        [r"$\vdots$", r"$\ddots$", ""],
-        [r"$a_{1,j,i}$", "", r"$a_{k,j,i}$"],
-    ],
-    declarations="""
-        \pgfdeclareverticalshading{red_green}{100bp}{
-            color(0bp)=(red); color(25bp)=(red); color(75bp)=(green); color(100bp)=(green)
-        }
-        
-        \pgfdeclareverticalshading{brown_green}{100bp}{
-            color(0bp)=(brown); color(25bp)=(brown); color(75bp)=(green); color(100bp)=(green)
-        }
-        
-        \pgfdeclareverticalshading{brown_red}{100bp}{
-            color(0bp)=(brown); color(25bp)=(brown); color(75bp)=(red); color(100bp)=(red)
-        }
-    """,
-    front_col=[
-        [r"none", r"green", r"none"],
-        [r"red", r"none, shading=red_green, shading angle= -45", r"red"],
-        [r"none", r"green", r"none"],
-    ],
-    top_col=[
-        [r"none", r"green", r"none"],
-        [r"brown", r"none, shading=brown_green, shading angle= -45", r"brown"],
-        [r"none", r"green", r"none"],
-    ],
-    side_col=[
-        [r"none", r"brown", r"none"],
-        [r"red", r"none, shading=brown_red, shading angle= -45", r"red"],
-        [r"none", r"brown", r"none"],
-    ],
-    xlab=r"\textcolor{brown}{\textbf{k}}",
-    ylab=r"\textcolor{red}{\textbf{j}}",
-    zlab=r"\textcolor{green}{\textbf{i}}"))))
+            [r"$a_{1,1,i}$", r"$\cdots$", r"$a_{k,1,i}$"],
+            [r"$\vdots$", r"$\ddots$", ""],
+            [r"$a_{1,j,i}$", "", r"$a_{k,j,i}$"],
+        ],
+        declarations=r"""
+            \pgfdeclareverticalshading{red_green}{100bp}{
+                color(0bp)=(red); color(25bp)=(red); color(75bp)=(green); color(100bp)=(green)
+            }
+            
+            \pgfdeclareverticalshading{brown_green}{100bp}{
+                color(0bp)=(brown); color(25bp)=(brown); color(75bp)=(green); color(100bp)=(green)
+            }
+            
+            \pgfdeclareverticalshading{brown_red}{100bp}{
+                color(0bp)=(brown); color(25bp)=(brown); color(75bp)=(red); color(100bp)=(red)
+            }
+        """,
+        front_col=[
+            [r"none", r"green", r"none"],
+            [r"red", r"none, shading=red_green, shading angle= -45", r"red"],
+            [r"none", r"green", r"none"],
+        ],
+        top_col=[
+            [r"none", r"green", r"none"],
+            [r"brown", r"none, shading=brown_green, shading angle= -45", r"brown"],
+            [r"none", r"green", r"none"],
+        ],
+        side_col=[
+            [r"none", r"brown", r"none"],
+            [r"red", r"none, shading=brown_red, shading angle= -45", r"red"],
+            [r"none", r"brown", r"none"],
+        ],
+        xlab=r"\textcolor{brown}{\textbf{k}}",
+        ylab=r"\textcolor{red}{\textbf{j}}",
+        zlab=r"\textcolor{green}{\textbf{i}}"))))
